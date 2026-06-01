@@ -1,0 +1,10 @@
+# Claude Code & superpowers
+.claude/
+.superpowers/
+docs/
+
+# Dependencies
+client/node_modules/
+
+# Build output (Vercel builds this)
+client/dist/
