@@ -44,22 +44,13 @@ export default function Navbar() {
         justifyContent: 'space-between',
       }}>
         {/* Logo */}
-        <a href="#hero">
-          <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '7px',
-            background: 'var(--accent)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontWeight: 700,
-            fontSize: '12px',
-            color: '#FFFFFF',
-            letterSpacing: '-0.02em',
-          }}>JG</div>
-        </a>
+        <a href="#hero" style={{
+          fontFamily: "'Space Grotesk', sans-serif",
+          fontWeight: 600,
+          fontSize: '15px',
+          color: 'var(--accent)',
+          letterSpacing: '-0.02em',
+        }}>Joshua</a>
 
         {/* Links */}
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>

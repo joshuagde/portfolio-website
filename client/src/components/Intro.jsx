@@ -12,6 +12,8 @@ const PHRASES = [
   { prefix: 'I',      word: 'solve problems' },
   { prefix: "I'm an", word: 'Analyst' },
   { prefix: 'I',      word: 'build MVPs' },
+  { prefix: "I'm an", word: 'ML Engineer' },
+  { prefix: 'I',      word: 'build models' },
 ]
 
 function useTypewriter(phrases, typingSpeed = 85, deletingSpeed = 50, pauseMs = 1700) {
@@ -164,7 +166,8 @@ export default function Intro() {
             </a>
             <a
               href="/resume.pdf"
-              download="Joshua_Goi_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 padding: '11px 28px', borderRadius: '8px',
                 border: '1px solid var(--border)', color: 'var(--text-primary)',

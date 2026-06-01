@@ -949,7 +949,7 @@ export default function HeroRightCanvas({ onSceneChange, containerRef }) {
     function drawFA_Momentum(c, pw, ph, age) {
       const DUR = 5500
       const mins = Math.min(90, (age / DUR) * 90 * 1.30)
-      const PL = 8, PR = Math.round(pw * 0.10), PT = 15, PB = 14, cW = pw - PL - PR, cH = (ph - PT - PB) / 2 - 2, centerY = PT + cH + 2
+      const PL = 8, PR = 6, PT = 15, PB = 14, cW = pw - PL - PR, cH = (ph - PT - PB) / 2 - 2, centerY = PT + cH + 2
 
       c.font = 'bold 6.5px Inter,sans-serif'; c.textAlign = 'left'; c.fillStyle = N + '0.48)'; c.fillText('Match Momentum', PL, 10)
       c.beginPath(); c.moveTo(PL, centerY); c.lineTo(pw - PR, centerY); c.strokeStyle = N + '0.15)'; c.lineWidth = .8; c.stroke()

@@ -61,7 +61,7 @@ export default function About() {
               color: 'var(--text-primary)',
             }}
           >
-            The person<br />behind the data
+            About me
           </h2>
           <p style={{ fontSize: '1rem', lineHeight: 1.85, color: 'var(--text-muted)', marginBottom: '1.1rem' }}>
             I am an aspiring data scientist currently building agentic systems and LLM pipelines to transform raw data into actionable insights that drive decision-making and solve real-world problems. 
