@@ -15,6 +15,15 @@
   --shadow-sm:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md:     0 4px 16px rgba(0,0,0,0.08);
   --shadow-lg:     0 8px 32px rgba(0,0,0,0.10);
+  --sv: 7rem;
+  --sh: 2rem;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sv: 4rem;
+    --sh: 1.25rem;
+  }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

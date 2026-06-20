@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import HeroRightCanvas from './HeroRightCanvas'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 /* ================================================================
    TYPEWRITER
@@ -51,6 +52,7 @@ function useTypewriter(phrases, typingSpeed = 85, deletingSpeed = 50, pauseMs = 
 export default function Intro() {
   const { text, phrase } = useTypewriter(PHRASES)
   const containerRef = useRef(null)
+  const isMobile = useIsMobile()
 
   return (
     /*
@@ -78,11 +80,11 @@ export default function Intro() {
         justifyContent: 'space-between',
         maxWidth: '1320px',
         margin: '0 auto',
-        padding: '7rem 4vw 5rem',
+        padding: isMobile ? '5rem 1.5rem 3rem' : '7rem 4vw 5rem',
       }}>
 
         {/* ── Left: text content ──────────────────────────────── */}
-        <div style={{ flex: '0 0 auto', minWidth: 0, maxWidth: '480px' }}>
+        <div style={{ flex: isMobile ? '1 1 auto' : '0 0 auto', minWidth: 0, maxWidth: isMobile ? '100%' : '480px' }}>
 
           {/* Eyebrow */}
           <motion.p

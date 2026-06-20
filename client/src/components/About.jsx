@@ -28,7 +28,7 @@ export default function About() {
       id="about"
       ref={ref}
       style={{
-        padding: '7rem 2rem',
+        padding: 'var(--sv) var(--sh)',
         maxWidth: '1100px',
         margin: '0 auto',
         borderTop: '1px solid var(--border)',

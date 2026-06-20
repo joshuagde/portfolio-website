@@ -36,7 +36,7 @@ export default function Footer() {
       id="contact"
       ref={ref}
       style={{
-        padding: '7rem 2rem 4rem',
+        padding: 'var(--sv) var(--sh) calc(var(--sv) * 0.57)',
         borderTop: '1px solid var(--border)',
         background: 'var(--bg-surface)',
       }}

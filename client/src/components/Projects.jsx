@@ -176,7 +176,7 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="projects" ref={ref} style={{ padding: '7rem 2rem', maxWidth: '1100px', margin: '0 auto', borderTop: '1px solid var(--border)' }}>
+    <section id="projects" ref={ref} style={{ padding: 'var(--sv) var(--sh)', maxWidth: '1100px', margin: '0 auto', borderTop: '1px solid var(--border)' }}>
       <motion.p className="section-label"
         initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.45 }}
         style={{ marginBottom: '0.75rem' }}
@@ -189,7 +189,7 @@ export default function Projects() {
         Things I&apos;ve built
       </motion.h2>
 
-      <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'stretch', flexWrap: 'wrap' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '1.25rem', alignItems: 'stretch' }}>
         {PROJECTS.map((p, i) => (
           <ProjectCard key={p.name} project={p} index={i} />
         ))}
