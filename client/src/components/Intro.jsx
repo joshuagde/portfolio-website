@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import HeroRightCanvas from './HeroRightCanvas'
 import { useIsMobile } from '../hooks/useIsMobile'
 
@@ -53,6 +54,25 @@ export default function Intro() {
   const { text, phrase } = useTypewriter(PHRASES)
   const containerRef = useRef(null)
   const isMobile = useIsMobile()
+
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  useEffect(() => {
+    if (!dropdownOpen) return
+    function handleOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => document.removeEventListener('mousedown', handleOutside)
+  }, [dropdownOpen])
+
+  function handleProjects() {
+    setDropdownOpen(false)
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     /*
@@ -153,19 +173,143 @@ export default function Intro() {
             transition={{ delay: 0.65, duration: 0.55 }}
             style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}
           >
-            <a
-              href="#projects"
-              style={{
-                padding: '11px 28px', borderRadius: '8px',
-                background: 'var(--accent)', color: '#FFFFFF',
-                fontWeight: 600, fontSize: '0.875rem',
-                transition: 'all 0.2s', display: 'inline-block',
-              }}
-              onMouseEnter={e => { e.target.style.background = '#0F2540'; e.target.style.transform = 'translateY(-1px)' }}
-              onMouseLeave={e => { e.target.style.background = 'var(--accent)'; e.target.style.transform = 'translateY(0)' }}
-            >
-              View My Work
-            </a>
+            <div ref={dropdownRef} style={{ position: 'relative', display: 'inline-block' }}>
+              <button
+                onClick={() => setDropdownOpen(o => !o)}
+                style={{
+                  padding: '11px 28px',
+                  borderRadius: '8px',
+                  background: 'var(--accent)',
+                  color: '#FFFFFF',
+                  fontWeight: 600,
+                  fontSize: '0.875rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  transition: 'background 0.2s, transform 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#0F2540'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(0)' }}
+              >
+                View My Work
+                <span style={{
+                  fontSize: '0.65rem',
+                  display: 'inline-block',
+                  transition: 'transform 0.2s',
+                  transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                }}>▾</span>
+              </button>
+
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.15 }}
+                  style={{
+                    position: 'absolute',
+                    top: 'calc(100% + 8px)',
+                    left: 0,
+                    minWidth: '230px',
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border)',
+                    borderRadius: '10px',
+                    boxShadow: 'var(--shadow-md)',
+                    padding: '0.4rem',
+                    zIndex: 50,
+                  }}
+                >
+                  {/* Synthesis */}
+                  <Link
+                    to="/experience/synthesis"
+                    onClick={() => setDropdownOpen(false)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '0.65rem',
+                      padding: '0.55rem 0.85rem', borderRadius: '6px',
+                      fontSize: '0.82rem', fontWeight: 500,
+                      color: 'var(--text-primary)', textDecoration: 'none',
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-dim)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    <div style={{
+                      width: 22, height: 22, borderRadius: 5, flexShrink: 0,
+                      background: 'linear-gradient(135deg, #E86B2C 0%, #F09040 100%)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      <img
+                        src="https://cdn.prod.website-files.com/63735bd38b9cf9437a4b4b97/6746d4be4dfa4f72bc069eb4_synthesis-logo-white.svg"
+                        alt=""
+                        style={{ width: 13, height: 'auto' }}
+                        onError={e => { e.target.style.display = 'none' }}
+                      />
+                    </div>
+                    Synthesis
+                  </Link>
+
+                  {/* Coca-Cola */}
+                  <Link
+                    to="/experience/coke"
+                    onClick={() => setDropdownOpen(false)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '0.65rem',
+                      padding: '0.55rem 0.85rem', borderRadius: '6px',
+                      fontSize: '0.82rem', fontWeight: 500,
+                      color: 'var(--text-primary)', textDecoration: 'none',
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-dim)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    <div style={{
+                      width: 22, height: 22, borderRadius: 5, flexShrink: 0,
+                      background: 'linear-gradient(160deg, #E61619 0%, #8B0000 100%)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg"
+                        alt=""
+                        style={{ width: 15, height: 'auto', filter: 'brightness(0) invert(1)' }}
+                        onError={e => { e.target.style.display = 'none' }}
+                      />
+                    </div>
+                    The Coca-Cola Company
+                  </Link>
+
+                  {/* Divider */}
+                  <div style={{ height: '1px', background: 'var(--border)', margin: '0.3rem 0.5rem' }} />
+
+                  {/* Personal Projects */}
+                  <button
+                    onClick={handleProjects}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '0.65rem',
+                      padding: '0.55rem 0.85rem', borderRadius: '6px',
+                      fontSize: '0.82rem', fontWeight: 500,
+                      color: 'var(--text-primary)',
+                      background: 'transparent', border: 'none',
+                      cursor: 'pointer', width: '100%', textAlign: 'left',
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-dim)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                  >
+                    <div style={{
+                      width: 22, height: 22, borderRadius: 5, flexShrink: 0,
+                      background: 'var(--accent-dim)',
+                      border: '1px solid var(--border)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: '0.75rem', color: 'var(--accent)',
+                    }}>
+                      ⊞
+                    </div>
+                    Personal Projects
+                  </button>
+                </motion.div>
+              )}
+            </div>
             <a
               href="/resume.pdf"
               target="_blank"

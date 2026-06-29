@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useIsMobile } from '../hooks/useIsMobile'
 
 const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About',      href: '/#about' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Projects',   href: '/#projects' },
+  { label: 'Contact',    href: '/#contact' },
 ]
 
 const HamburgerIcon = ({ open }) => (
@@ -74,7 +74,7 @@ export default function Navbar() {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-          <a href="#hero" style={{
+          <a href="/" style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontWeight: 600,
             fontSize: '15px',

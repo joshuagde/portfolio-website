@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { useIsMobile } from '../hooks/useIsMobile'
+import { Link } from 'react-router-dom'
 
 /* ================================================================
    SHARED ICON HEIGHT — both icons use this so the timeline line
@@ -488,91 +488,83 @@ const EXPERIENCES = [
 /* ================================================================
    TIMELINE NODE
    ================================================================ */
-function TimelineNode({ exp, isMobile, isActive, onToggle }) {
+function TimelineNode({ exp }) {
   const [hovered, setHovered] = useState(false)
-  const active = isMobile ? isActive : hovered
 
   return (
-    /* flex: 1 lets both nodes share the timeline width equally */
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-
-      {/* Inline-block wrapper — hover card anchors to this */}
       <div
         style={{ position: 'relative', display: 'inline-block' }}
-        onMouseEnter={!isMobile ? () => setHovered(true) : undefined}
-        onMouseLeave={!isMobile ? () => setHovered(false) : undefined}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
-        {/* ── Desktop: floating info card (appears above icon) ── */}
-        {!isMobile && (
-          <AnimatePresence>
-            {hovered && (
-              <motion.div
-                key="card"
-                initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                transition={{ duration: 0.18, ease: 'easeOut' }}
-                style={{
-                  position: 'absolute',
-                  bottom: `calc(100% + 14px)`,
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: 248,
-                  background: 'var(--bg-card)',
-                  border: `1px solid ${exp.accentColor}35`,
-                  borderRadius: 12,
-                  padding: '1rem 1.1rem',
-                  boxShadow: `0 8px 28px rgba(0,0,0,0.12), 0 0 0 1px ${exp.accentColor}15`,
-                  zIndex: 30,
-                  pointerEvents: 'none',
-                }}
-              >
-                <p style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>
-                  {exp.company}
-                </p>
-                <p style={{ fontSize: '0.78rem', fontWeight: 600, color: exp.accentColor, marginBottom: '0.6rem' }}>
-                  {exp.role} · {exp.period}
-                </p>
-                <p style={{ fontSize: '0.78rem', lineHeight: 1.6, color: 'var(--text-muted)', marginBottom: '0.65rem' }}>
-                  {exp.description}
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                  {exp.tags.map(tag => (
-                    <span key={tag} style={{
-                      padding: '2px 7px', borderRadius: 4, fontSize: '0.67rem', fontWeight: 500,
-                      background: `${exp.accentColor}10`, color: exp.accentColor,
-                      border: `1px solid ${exp.accentColor}22`,
-                    }}>{tag}</span>
-                  ))}
-                </div>
-                {/* Caret */}
-                <div style={{
-                  position: 'absolute', bottom: -7, left: '50%',
-                  transform: 'translateX(-50%) rotate(45deg)',
-                  width: 12, height: 12, background: 'var(--bg-card)',
-                  borderRight: `1px solid ${exp.accentColor}35`,
-                  borderBottom: `1px solid ${exp.accentColor}35`,
-                }}/>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        )}
+        {/* Desktop hover card */}
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              key="card"
+              initial={{ opacity: 0, y: 8, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.97 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              style={{
+                position: 'absolute',
+                bottom: `calc(100% + 14px)`,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: 248,
+                background: 'var(--bg-card)',
+                border: `1px solid ${exp.accentColor}35`,
+                borderRadius: 12,
+                padding: '1rem 1.1rem',
+                boxShadow: `0 8px 28px rgba(0,0,0,0.12), 0 0 0 1px ${exp.accentColor}15`,
+                zIndex: 30,
+                pointerEvents: 'none',
+              }}
+            >
+              <p style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>
+                {exp.company}
+              </p>
+              <p style={{ fontSize: '0.78rem', fontWeight: 600, color: exp.accentColor, marginBottom: '0.6rem' }}>
+                {exp.role} · {exp.period}
+              </p>
+              <p style={{ fontSize: '0.78rem', lineHeight: 1.6, color: 'var(--text-muted)', marginBottom: '0.65rem' }}>
+                {exp.description}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                {exp.tags.map(tag => (
+                  <span key={tag} style={{
+                    padding: '2px 7px', borderRadius: 4, fontSize: '0.67rem', fontWeight: 500,
+                    background: `${exp.accentColor}10`, color: exp.accentColor,
+                    border: `1px solid ${exp.accentColor}22`,
+                  }}>{tag}</span>
+                ))}
+              </div>
+              <div style={{
+                position: 'absolute', bottom: -7, left: '50%',
+                transform: 'translateX(-50%) rotate(45deg)',
+                width: 12, height: 12, background: 'var(--bg-card)',
+                borderRight: `1px solid ${exp.accentColor}35`,
+                borderBottom: `1px solid ${exp.accentColor}35`,
+              }}/>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* ── Icon ── */}
-        <div
-          style={{ cursor: 'pointer', display: 'flex', justifyContent: 'center' }}
-          onClick={isMobile ? onToggle : undefined}
+        {/* Icon — clicking navigates to the blog page */}
+        <Link
+          to={`/experience/${exp.id}`}
+          style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}
         >
           {exp.id === 'coke'
-            ? <LiquidColaIcon hovered={active} />
-            : <SynthesisIcon hovered={active} />
+            ? <LiquidColaIcon hovered={hovered} />
+            : <SynthesisIcon hovered={hovered} />
           }
-        </div>
+        </Link>
 
-        {/* Period label */}
         <p style={{
           marginTop: '0.5rem', fontSize: '0.7rem', fontWeight: 600, textAlign: 'center',
-          color: active ? exp.accentColor : 'var(--text-muted)',
+          color: hovered ? exp.accentColor : 'var(--text-muted)',
           transition: 'color 0.2s', letterSpacing: '0.02em',
         }}>
           {exp.period}
@@ -588,14 +580,7 @@ function TimelineNode({ exp, isMobile, isActive, onToggle }) {
 export default function Experience() {
   const ref    = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-  const isMobile = useIsMobile()
-  const [activeId, setActiveId] = useState(null)
 
-  const handleToggle = (id) => setActiveId(prev => prev === id ? null : id)
-  const activeExp = EXPERIENCES.find(e => e.id === activeId)
-
-  /* The connecting line sits at top = ICON_H / 2 so it exactly
-     bisects the vertical centre of both icons.                  */
   const lineTop = ICON_H / 2
 
   return (
@@ -619,25 +604,13 @@ export default function Experience() {
           }}
         >Where I&apos;ve been</motion.h2>
 
-        {/* ── Timeline ── */}
         <div style={{ position: 'relative' }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', position: 'relative' }}>
-            <TimelineNode
-              exp={EXPERIENCES[0]}
-              isMobile={isMobile}
-              isActive={activeId === EXPERIENCES[0].id}
-              onToggle={() => handleToggle(EXPERIENCES[0].id)}
-            />
+            <TimelineNode exp={EXPERIENCES[0]} />
             <div style={{ flex: 1 }} />
-            <TimelineNode
-              exp={EXPERIENCES[1]}
-              isMobile={isMobile}
-              isActive={activeId === EXPERIENCES[1].id}
-              onToggle={() => handleToggle(EXPERIENCES[1].id)}
-            />
+            <TimelineNode exp={EXPERIENCES[1]} />
           </div>
 
-          {/* Connecting line — top exactly at icon centre */}
           <motion.div
             initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.4, ease: 'easeOut' }}
@@ -653,60 +626,10 @@ export default function Experience() {
           />
         </div>
 
-        {/* Year markers */}
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.75rem' }}>
           <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'var(--text-muted)', letterSpacing: '0.1em' }}>2025</span>
           <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'var(--text-muted)', letterSpacing: '0.1em' }}>2026</span>
         </div>
-
-        {/* Mobile: tap hint + full-width detail card */}
-        {isMobile && (
-          <>
-            {!activeId && (
-              <p style={{ textAlign: 'center', marginTop: '1.25rem', fontSize: '0.72rem', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>
-                Tap an icon to view details
-              </p>
-            )}
-            <AnimatePresence>
-              {activeExp && (
-                <motion.div
-                  key={activeExp.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 6 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
-                  style={{
-                    marginTop: '1.5rem',
-                    background: 'var(--bg-card)',
-                    border: `1px solid ${activeExp.accentColor}35`,
-                    borderRadius: 12,
-                    padding: '1.25rem',
-                    boxShadow: `0 6px 24px rgba(0,0,0,0.10)`,
-                  }}
-                >
-                  <p style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>
-                    {activeExp.company}
-                  </p>
-                  <p style={{ fontSize: '0.8rem', fontWeight: 600, color: activeExp.accentColor, marginBottom: '0.75rem' }}>
-                    {activeExp.role} · {activeExp.period}
-                  </p>
-                  <p style={{ fontSize: '0.82rem', lineHeight: 1.65, color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-                    {activeExp.description}
-                  </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-                    {activeExp.tags.map(tag => (
-                      <span key={tag} style={{
-                        padding: '3px 8px', borderRadius: 4, fontSize: '0.7rem', fontWeight: 500,
-                        background: `${activeExp.accentColor}10`, color: activeExp.accentColor,
-                        border: `1px solid ${activeExp.accentColor}22`,
-                      }}>{tag}</span>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </>
-        )}
       </div>
     </section>
   )
