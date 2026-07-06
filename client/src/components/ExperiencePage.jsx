@@ -91,8 +91,8 @@ const BLOG_DATA = {
         ],
       },
       {
-        name: 'F&B Venue Identification and Scoring (Brown Forman)',
-        description: 'Built an end-to-end pipeline to extract, deduplicate, and score F&B venues across a target APAC market to support Brown Forman\'s distribution strategy.',
+        name: 'F&B Venue Identification and Prioritization',
+        description: 'Built an end-to-end pipeline to extract, deduplicate, and score F&B venues across a target APAC market to support a global spirit client\'s distribution strategy.',
         outcomes: [
           'Delivered a scored, ranked venue dataset and statistics summary as the client deliverable',
           'Multi-source extraction across Google Maps Grid Search and SerpAPI for maximum coverage',
@@ -102,7 +102,7 @@ const BLOG_DATA = {
         detail: [
           {
             type: 'text',
-            content: 'Brown Forman needed to identify and score F&B venues across a target APAC market as part of a distribution strategy engagement. The pipeline covered everything from raw extraction across multiple APIs through to a scored, ranked output and summary statistics that the strategy team could present to the client.',
+            content: 'A global spirit client needed to identify and prioritize F&B venues across a target APAC market as part of a distribution strategy engagement. The pipeline covered everything from raw extraction across multiple APIs through to a scored, ranked output and summary statistics that the strategy team could present to the client.',
           },
           {
             type: 'section',
@@ -150,7 +150,7 @@ const BLOG_DATA = {
               {
                 type: 'bullets',
                 items: [
-                  'Drink classification: binary flags for alcohol vs non-alcohol service, and specific spirits categories matched against Brown Forman\'s portfolio',
+                  'Drink classification: binary flags for alcohol vs non-alcohol service, and specific spirits categories matched against the client\'s portfolio',
                   'Menu item text parsed to extract brand alignment signals where structured drink fields were absent',
                   'Venue category: missing values imputed using keyword-based text classification on venue name and context, with KNN imputation as a fallback for venues where text signals were insufficient',
                   'Price tier from the Google Maps price indicator as a proxy for premium positioning',
@@ -167,7 +167,7 @@ const BLOG_DATA = {
       },
       {
         name: 'Geospatial Coverage Optimisation',
-        description: 'Identified a retrieval coverage gap in the team\'s shared geospatial pipeline while working on the Brown Forman project and refactored it to improve coverage and reduce per-engagement API cost.',
+        description: 'Identified a retrieval coverage gap in the team\'s shared geospatial pipeline while working on the spirits client project and refactored it to improve coverage and reduce per-engagement API cost.',
         outcomes: [
           'Higher venue retrieval coverage across target geographic areas',
           'Lower per-engagement API cost from eliminating redundant calls',
@@ -177,7 +177,7 @@ const BLOG_DATA = {
         detail: [
           {
             type: 'text',
-            content: 'The issue surfaced during the Brown Forman project. We were not finding as many venues as the client expected, and the pipeline was running slowly with relatively high API costs per engagement. This pointed to a problem in the underlying extraction approach rather than the data itself.',
+            content: 'The issue surfaced during the spirits client project. We were not finding as many venues as the client expected, and the pipeline was running slowly with relatively high API costs per engagement. This pointed to a problem in the underlying extraction approach rather than the data itself.',
           },
           {
             type: 'section',
@@ -207,7 +207,7 @@ const BLOG_DATA = {
               },
               {
                 type: 'text',
-                content: 'The refactored pipeline produced higher retrieval coverage and lower API cost per run. It was applied directly to the Brown Forman project and carried forward as the team standard for all subsequent geo segmentation engagements.',
+                content: 'The refactored pipeline produced higher retrieval coverage and lower API cost per run. It was applied directly to the spirits client project and carried forward as the team standard for all subsequent geo segmentation engagements.',
               },
             ],
           },
@@ -254,7 +254,7 @@ const BLOG_DATA = {
         detail: [
           {
             type: 'text',
-            content: 'Leadership meetings had no pre-reading. KPI performance, financial metrics, and project updates were reviewed in the meeting itself, taking up time that should have been spent on decisions. The pipeline runs automatically each week across four flows and delivers structured briefs before the meeting starts.',
+            content: 'Leadership meetings had no detailed agenda. KPI performance, financial metrics, and project updates were reviewed in the meeting itself, taking up time that should have been spent on discussion and making decisions. I built an agentic PoC to demonstrate how AI can automate this preparation process and save a significant amount of time.The scheduled pipeline runs across four flows and delivers detailed briefs and agenda item recommendations before each global leadership meeting.',
           },
           { type: 'diagram', name: 'AgendaWorkflow' },
           {
@@ -312,7 +312,7 @@ const BLOG_DATA = {
       },
       {
         name: 'RCA Investigation Agentic Chatbot',
-        description: 'LangGraph chatbot that walks an engineer through a structured equipment failure investigation — pausing at each stage to ask targeted questions, querying historical maintenance records, and assembling a root cause report once the investigation is complete.',
+        description: 'LangGraph chatbot that walks an engineer through a structured equipment failure investigation pausing at each stage to ask targeted questions, querying historical maintenance records, and assembling a root cause report once the investigation is complete.',
         outcomes: [
           'Demoed to external industrial vendors as a proof of concept',
           'Human-in-the-loop interrupt cycle drives a structured, multi-stage investigation',
@@ -322,7 +322,7 @@ const BLOG_DATA = {
         detail: [
           {
             type: 'text',
-            content: 'Root cause analysis for equipment failures is a long, multi-step process. Engineers gather information about the failure, cross-reference historical records, and reason across multiple possible causes before settling on one. The agent was designed to replicate that process — driving a structured staged investigation by asking targeted questions at each stage and pulling relevant historical data before producing a final report.',
+            content: 'The root cause analysis (RCA) process was initially long. inconsistent and required a lot of manual effort to gather evidence from various sources. Engineers gather information about the failure, cross-reference historical records, and reason across multiple possible causes before settling on one. The agent was designed to replicate that process — driving a structured staged investigation by asking targeted questions at each stage and pulling relevant historical data before producing a final report for human validation.',
           },
           { type: 'diagram', name: 'RcaUI' },
           {
@@ -375,7 +375,7 @@ const BLOG_DATA = {
         detail: [
           {
             type: 'text',
-            content: 'Maintenance logs are written by operators in the field — inconsistent, abbreviated, and resistant to keyword search. "Mechanical seal failure" and "pump leaking from shaft" describe the same event but share no keywords. The goal was a system that takes a natural-language query about a failure, retrieves the most relevant historical resolution records, and summarises them into an actionable paragraph.',
+            content: 'Maintenance logs are written by experienced employees in the plant which means the stored information is often inconsistent, informal and hence difficult to query and retrieve. For example, "Mechanical seal failure" and "pump leaking from shaft" describe the same event but share no keywords. The goal was to build a system that takes a natural-language query about a failure, retrieves the most relevant historical resolution records, and summarises them into an actionable paragraph.',
           },
           {
             type: 'section',
